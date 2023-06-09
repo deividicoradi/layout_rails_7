@@ -1,0 +1,21 @@
+<section class="panel banner right">
+	<div class="content color0 span-3-75">
+    <a href="/">Voltar para home</a><br>
+
+    <p style="color: green"><%= notice %></p>
+
+    <%= render @cliente %>
+
+    <div>
+      <%= link_to "Edit this cliente", edit_cliente_path(@cliente) %> |
+      <%= link_to "Back to clientes", clientes_path %>
+
+      <%= button_to "Destroy this cliente", @cliente, method: :delete %>
+    </div>
+
+  </div>
+
+	<div class="image filtered span-1-75" data-position="25% 25%">
+    <img src="/images/pic01.jpg" alt="" />
+  </div>
+</section>

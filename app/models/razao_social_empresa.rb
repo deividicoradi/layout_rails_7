@@ -1,0 +1,2 @@
+class RazaoSocialEmpresa < ApplicationRecord
+end

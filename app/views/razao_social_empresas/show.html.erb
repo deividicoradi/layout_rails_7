@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @razao_social_empresa %>
+
+<div>
+  <%= link_to "Edit this razao social empresa", edit_razao_social_empresa_path(@razao_social_empresa) %> |
+  <%= link_to "Back to razao social empresas", razao_social_empresas_path %>
+
+  <%= button_to "Destroy this razao social empresa", @razao_social_empresa, method: :delete %>
+</div>

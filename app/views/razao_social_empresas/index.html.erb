@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Razao social empresas</h1>
+
+<div id="razao_social_empresas">
+  <% @razao_social_empresas.each do |razao_social_empresa| %>
+    <%= render razao_social_empresa %>
+    <p>
+      <%= link_to "Show this razao social empresa", razao_social_empresa %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New razao social empresa", new_razao_social_empresa_path %>

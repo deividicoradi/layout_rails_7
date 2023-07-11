@@ -1,0 +1,27 @@
+<%= form_with(model: razao_social_empresa) do |form| %>
+  <% if razao_social_empresa.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(razao_social_empresa.errors.count, "error") %> prohibited this razao_social_empresa from being saved:</h2>
+
+      <ul>
+        <% razao_social_empresa.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :fornecedores, style: "display: block" %>
+    <%= form.text_field :fornecedores %>
+  </div>
+
+  <div>
+    <%= form.label :razao_social, style: "display: block" %>
+    <%= form.text_field :razao_social %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

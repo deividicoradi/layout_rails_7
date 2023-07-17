@@ -13,3 +13,43 @@
  *= require_tree .
  *= require_self
  */
+.app-principal{
+color: aquamarine;
+}
+.btn{
+width: 60px;
+height: 30px;
+font-size: 8px;
+padding: 0px;
+margin: 0px;
+vertical-align: middle;
+letter-spacing: 0px;
+line-height: 0px;
+}
+
+.notice{
+border-radius: 10px;
+color: #6ffb6f;
+position: absolute;
+z-index: 9999;
+top: 4%;
+right: 2%;
+background: #00000078;
+display: block;
+text-align: right;
+padding: 10px;
+}
+
+
+.error{
+border-radius: 10px;
+color: #fb6f6f;
+position: absolute;
+z-index: 9999;
+top: 4%;
+right: 2%;
+background: #00000078;
+display: block;
+text-align: right;
+padding: 10px;
+}

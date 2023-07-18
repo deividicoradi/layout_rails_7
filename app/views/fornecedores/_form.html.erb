@@ -1,32 +1,25 @@
-<%= form_with(model: fornecedore) do |form| %>
-  <% if fornecedore.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(fornecedore.errors.count, "error") %> prohibited this fornecedore from being saved:</h2>
+<a href="<%= fornecedores_path %>">Lista de Fornecedores</a><br>
 
-      <ul>
-        <% fornecedore.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<form action="<%= url %>" <% if method == 'put' %> data-put-com-redirect="<%= fornecedores_path %>" <% else %> method="<%= method %>" <% end %>>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" value="<%= @fornecedor.nome %>" name="fornecedor[nome]" >
   </div>
-
   <div>
-    <%= form.label :cnp, style: "display: block" %>
-    <%= form.text_field :cnp %>
+    <label for="nome">Razão Social:</label>
+    <input type="text" id="nome" value="<%= @fornecedor.razao_social %>" name="fornecedor[razao_social]" required>
   </div>
-
   <div>
-    <%= form.label :endereco, style: "display: block" %>
-    <%= form.text_field :endereco %>
+    <label for="cnpj">CNPJ:</label>
+    <input type="text" id="cnpj" value="<%= @fornecedor.cnpj %>" name="fornecedor[cnpj]" required>
   </div>
-
   <div>
-    <%= form.submit %>
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" value="<%= @fornecedor.endereco %>" name="fornecedor[endereco]" required>
   </div>
-<% end %>
+  <br>
+  <div>
+    <input type="submit" value="Salvar">
+  </div>
+</form>

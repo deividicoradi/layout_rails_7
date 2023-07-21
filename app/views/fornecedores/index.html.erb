@@ -2,11 +2,18 @@
   <div class="content color0 span-3-75">
     <a href="/">Voltar para home</a><br>
     <h1>Fornecedores</h1>
-
     <a href="<%= fornecedor_novo_path %>">Novo Fornecedor</a><br>
-
     <table>
       <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Razão Social</th>
+          <th>CNPJ</th>
+          <th>Endereço</th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
         <% @fornecedores.each do |fornecedor| %>
           <tr>
@@ -18,7 +25,7 @@
             <td>
                 <a href="<%= fornecedor_editar_path(fornecedor) %>" class="btn">Alterar</a>
                 <!-- a href="#" onclick="excluir('<%= fornecedor_excluir_path(fornecedor) %>', '<%= fornecedores_path %>')" class="btn">Excluir</a -->
-                <a href="#" data-excluir="<%= fornecedor_excluir_path(fornecedor) %>" class="btn">Excluir</a>
+                <a href="#" data-excluir="<%= fornecedor_excluir_path(fornecedor, format: :json) %>" class="btn">Excluir</a>
             </td>
           </tr>
         <% end %>

@@ -2,12 +2,13 @@ const verificarCarregamento = () => {
   deletePorDataAnotation();
   putPorDataAnotation();
 }
-
 // Adiciona um evento ao carregamento da página
 document.addEventListener("DOMContentLoaded", verificarCarregamento);
 
 const deletePorDataAnotation = () => {
   const elementos = document.querySelectorAll('[data-excluir]');
+  if(!elementos || elementos.length === 0) return;
+
   for(const elemento of elementos) {
     elemento.onclick = (event) =>{
       event.preventDefault();
@@ -20,17 +21,16 @@ const deletePorDataAnotation = () => {
 
 const putPorDataAnotation = () => {
   const form = document.querySelector('[data-put-com-redirect]');
+  if (!form) return;
   form.onsubmit = (event) =>{
     event.preventDefault();
     alterar(event.target)
   }
 }
-
 const alterar = async (form) => {
   const url_redirect = form.getAttribute("data-put-com-redirect");
   const action = form.getAttribute("action");
   const formObj = transformarObjeto(serialize(form));
-
   try {
     const response = await fetch(`${action}`, {
       method: 'PUT',
@@ -39,14 +39,11 @@ const alterar = async (form) => {
       },
       body: JSON.stringify(formObj),
     });
-
     window.location.href = url_redirect;
   } catch (error) {
     console.error(error);
   }
 };
-
-
 const excluir = async (url, url_redirect) => {
   if(confirm("Confirma ?")){
     try {
@@ -54,27 +51,26 @@ const excluir = async (url, url_redirect) => {
       const response = await fetch(`${url}?authenticity_token=${encodeURIComponent(csrfToken)}`, {
         method: 'DELETE'
       });
-
       if (response.ok) {
         if(url_redirect) window.location.href = url_redirect
         else window.location.reload()
       } else {
-        throw new Error('Erro ao excluir o fornecedor');
+        mensagem = await response.json()
+        throw new Error('Erro ao excluir o fornecedor ' + JSON.stringify(mensagem));
       }
     } catch (error) {
       console.error(error);
+      alert(error.message)
+      window.location.reload()
     }
   }
 }
-
 function transformarObjeto(formObj) {
   const novoObjeto = {};
-
   for (const key in formObj) {
     if (formObj.hasOwnProperty(key)) {
       const [objKey, nestedKey] = key.split('[');
       const nestedValue = formObj[key];
-
       if (nestedKey) {
         if (!novoObjeto[objKey]) {
           novoObjeto[objKey] = {};
@@ -85,22 +81,17 @@ function transformarObjeto(formObj) {
       }
     }
   }
-
   return novoObjeto;
 }
-
 const serialize = (form) => {
   if (!form || form.nodeName !== "FORM") {
     return;
   }
-
   var i, j, q = {};
-
   for (i = form.elements.length - 1; i >= 0; i = i - 1) {
     if (form.elements[i].name === "") {
       continue;
     }
-
     switch (form.elements[i].nodeName) {
       case "INPUT":
         switch (form.elements[i].type) {
@@ -151,6 +142,5 @@ const serialize = (form) => {
         break;
     }
   }
-
   return q;
 };
